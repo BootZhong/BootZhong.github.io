@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/slide.css"><!--从外部中插入滑动效果-->
     <style>
         body {
-            margin: 0;
-            padding: 0;
             min-height: 100vh;
             background-image: linear-gradient(
                     45deg,
@@ -15,43 +14,118 @@
             ); /*设置颜色渐变 方向(0deg垂直向上) 起点颜色 终点颜色*/
         }
         img{
-             width: 376px;
+             width: 350px;
+        }
+        .login{
+
+        }
+        .login a{
+            font-size: 30px;
+            color: #007bff;
+            position: absolute;
+            right: 100px;
+        }
+        .login input{
+            width: 500px;
+            height: 30px;
+            position: absolute;
+            top: 50px;
+            left: 30%;
+        }
+        .login button{
+            height: 30px;
+            position: absolute;
+            top: 50px;
+            right: 35%;
         }
     </style>
 </head>
 <body>
+<script>
+    window.onload = function(){
+        var oDiv = document.getElementById('div1');
+        var oUl = document.getElementById('ul1');
+        var speed = 2;//初始化速度
 
-       <table style="margin-top: 20px">
+        oUl.innerHTML += oUl.innerHTML;//使得一行的表格数翻倍形成溢出，使得一半的表格隐藏，从而产生滑动效果
+        var oLi= document.getElementsByTagName('li');
+        oUl.style.width = oLi.length*360+'px';//定义一行的总宽度为多少
+        var oBtn1 = document.getElementById('btn1');
+        var oBtn2 = document.getElementById('btn2');
+        console.log(oUl.offsetLeft);//距离左边框的距离
+        console.log(oUl.offsetWidth);//宽度
+
+        function move(){
+            if(oUl.offsetLeft<-(oUl.offsetWidth/2)){
+                //设置内容距离左边框的距离为0，即把四张照片隐藏在右边，然后慢慢往左滑动
+                oUl.style.left = 0;
+            }
+
+            if(oUl.offsetLeft > 0){//向右滚动，当靠右的图1移出边框时
+                //设置内容距离左边框的距离为宽度的负一半，即把四张照片隐藏在左边，然后慢慢往右滑动
+                oUl.style.left = -(oUl.offsetWidth/2)+'px';
+            }
+            //通过表格距离左边框的变化，生成滑动效果
+            //speed为负值时，左边框距离一直变小，形成左滑动，但是滑动有终点，即内容全部滑出边框的时候 右滑动同理
+            oUl.style.left = oUl.offsetLeft + speed + 'px';
+            console.log(oUl.style.left);
+        }
+
+        //控制向左滑动
+        oBtn1.addEventListener('click',function(){
+            speed = -2;
+        },false);
+        //控制向右滑动
+        oBtn2.addEventListener('click',function(){
+            speed = 2;
+        },false);
+
+        var timer = setInterval(move,30);//全局变量 ，保存返回的定时器
+
+        oDiv.addEventListener('mouseout', function () {
+            timer = setInterval(move,30);//鼠标移出增加定时器
+        },false);
+        oDiv.addEventListener('mousemove', function () {
+            clearInterval(timer);//鼠标移入清除定时器
+        },false);
+    }
+</script>
+
+    <div class="login">
+            <a href="Login1.html" >登录</a><br>
+            <input type="search"  id="go"  placeholder="请输入需要搜索的内容">
+            <button>搜索一下</button>
+    </div>
+
+    <input id="btn1" type="button" value="向左" hidden>
+    <input id="btn2" type="button" value="向右" hidden>
+    <div id="div1">
+        <ul id="ul1">
+            <li><img src="images/1.jpg"></li>
+            <li><img src="images/g5.jpg"></li>
+            <li><img src="images/g1.jpg"></li>
+            <li><img src="images/g2.jpg"></li>
+        </ul>
+    </div>
+
+    <table style="padding: 20px">
            <tr>
-               <th></th>
-               <th colspan="2">
-                   <input type="search" id="go" size="60" placeholder="请输入需要搜索的内容">
-               </th>
-               <th><a href="Login1.html">登录</a></th>
+               <td> <a href="product.html"><img src="images/g5.jpg"></a> </td>
+               <td> <a href="product.html"><img src="images/g5.jpg"></a> </td>
+               <td> <a href="product.html"><img src="images/g5.jpg"></a> </td>
+               <td> <a href="product.html"><img src="images/g5.jpg"></a> </td>
            </tr>
            <tr>
-               <td>——</td>
-               <td>——</td>
-               <td>——</td>
-               <td>——</td>
-           </tr>
-           <tr>
-               <td> <a href="product.html"><img src="images/479.png"></a> </td>
-               <td> <a href="product.html"><img src="images/479.png"></a> </td>
-               <td> <a href="product.html"><img src="images/479.png"></a> </td>
-               <td> <a href="product.html"><img src="images/479.png"></a> </td>
-           </tr>
-           <tr>
                <td> <a href="product.html">商品1</a> </td>
                <td> <a href="product.html">商品1</a> </td>
                <td> <a href="product.html">商品1</a> </td>
                <td> <a href="product.html">商品1</a> </td>
            </tr>
            <tr>
-               <td> <a href="product.html"><img src="images/479.png"></a> </td>
-               <td> <a href="product.html"><img src="images/479.png"></a> </td>
-               <td> <a href="product.html"><img src="images/479.png"></a> </td>
-               <td> <a href="product.html"><img src="images/479.png"></a> </td>
+               <td> <a href="product.html"><img src="images/g5.jpg"></a> </td>
+               <td> <a href="product.html"><img src="images/g5.jpg"></a> </td>
+               <td> <a href="product.html"><img src="images/g5.jpg"></a> </td>
+               <td> <a href="product.html"><img src="images/g5.jpg"></a> </td>
            </tr>
            <tr>
                <td> <a href="product.html">商品1</a> </td>
@@ -59,7 +133,7 @@
                <td> <a href="product.html">商品1</a> </td>
                <td> <a href="product.html">商品1</a> </td>
            </tr>
-       </table>
+    </table>
 </body>
 <script>
 
