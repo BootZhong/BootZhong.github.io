@@ -1,0 +1,31 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+#div1{
+    width: 1200px;
+    height: 340px;
+    margin: 100px auto;
+    background-color: #646464;
+    position: relative;
+    overflow: hidden;/*这个属性定义溢出元素内容区的内容会如何处理，这里是隐藏*/
+}
+#div1 ul{
+    position:absolute;/*相对父边框的位置,在这里父边框是div1*/
+    left:0;
+    top:0;
+    overflow: hidden;
+    background-color: #3b7796;
+}
+
+#div1 ul li{
+    float: left;/*意义不明*/
+    width: 360px;
+    height: 340px;
+    list-style: none;
+}
+img{
+    width: 360px;
+    height: 340px;
+}
